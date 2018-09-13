@@ -11,6 +11,7 @@
     <canvas id="gameCanvas" width="400" height="400"></canvas>
     <script src="enemy2.js"></script>
     <script src="player2.js"></script>
+        <script src="bullet.js"></script>
 <script>
     var canvas, canvasContext;
     
@@ -30,6 +31,9 @@
         var eGap = 8;
 
         var player= [];
+            var shooting = false;
+        
+        var bullets = []; 
        
 
         const WIDTH = 30; 
@@ -102,6 +106,16 @@ function setUp(){
 
         }
 
+    if(bullets.length > 0){
+                    bullets.forEach(function(item,index){
+                            item.drawingBullet();
+                            item.move();
+                    });
+                bullets = bullets.filter(item => item !== undefined);
+               }
+    
+    
+    
     function colorRect(x,y,w,h,color) {
         canvasContext.fillStyle = color;
         canvasContext.fillRect(x,y,w,h);

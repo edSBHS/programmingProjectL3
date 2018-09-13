@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <title>Canvas1</title>
+</head>
+
+<body>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <script>
+        var canvas, canvasContext;
+
+        window.onload = function() {
+            canvas = document.getElementById('gameCanvas');
+            canvasContext = canvas.getContext('2d');
+
+            document.addEventListener('keydown', keyPressed);
+            document.addEventListener('keyup', keyReleased);
+
+            setInterval(mainLoop, 1000 / 50);
+        }
+
+
+        var shipXpos = 10;
+        var shipYpos = 10;
+        var shipXSpeed = 5;
+        var shipYSpeed = 5;
+        const SHIP_SIZE = 30;
+
+
+        const UP = 38;
+        const RIGHT = 39;
+        const DOWN = 40;
+        const LEFT = 37;
+        const SPACEKEY = 32;
+
+        var upKeyPressed = false;
+        var rightKeyPressed = false;
+        var downKeyPressed = false;
+        var leftKeyPressed = false;
+        var spaceKeyPressed = false;
+
+//        var bulletXpos = 0;
+//        var bulletYpos = 0;
+//        var bulletYspeed = -8;
+//        const BULLET_WIDTH = 5;
+//        const BULLET_HEIGHT = 10;
+
+        var r = Math.floor(Math.random(40, 330) * 100);
+        var rd = true;
+        var g = Math.floor(Math.random(40, 330) * 100);
+        var gd = true;
+        var b = Math.floor(Math.random(40, 330) * 100);
+        var bd = true;
+        var shooting = false;
+        
+        var bullets = []; 
+        
+        var enemies = [];
+
+        var enemyCount = 5;
+        var level = 1;
+        var setUp = true;
+        
+        function mainLoop() {
+            drawEverything();
+            shipMovement();
+           // Bullet.drawingBullet();
+          //  bulletShoot();
+         refresh();
+            if(setUp){
+                enemySetUp();
+                    setUp = false;
+            }
+      //      drawBullets();
+            //bulletMove();
+            
+            if(enemies.length > 0){
+                enemies.forEach(function(item,index){
+                    item.drawingEnemy();
+                    item.enemyMove(0);
+                })
+                // ED needs to then run the move down function from class 
+            }
+            
+            if(bullets.length > 0){
+                    bullets.forEach(function(item,index){
+                            item.drawingBullet();
+                            item.move();
+                if(item.outOfBounds() || item.hasCollided()){
+                    delete bullets[index];
+                }
+                    });
+                bullets = bullets.filter(item => item !== undefined);
+               }
+            
+        }
+
+        function keyPressed(evt) {
+            if (evt.keyCode == UP) {
+                upKeyPressed = true;
+            }
+            if (evt.keyCode == RIGHT) {
+                rightKeyPressed = true;
+            }
+            if (evt.keyCode == DOWN) {
+                downKeyPressed = true;
+            }
+            if (evt.keyCode == LEFT) {
+                leftKeyPressed = true;
+            }
+            if (evt.keyCode == SPACEKEY) {
+                spaceKeyPressed = true;
+                drawMake();
+//                shooting = true;
+            }
+        }
+
+        function keyReleased(evt) {
+            if (evt.keyCode == UP) {
+                upKeyPressed = false;
+            }
+            if (evt.keyCode == RIGHT) {
+                rightKeyPressed = false;
+            }
+            if (evt.keyCode == DOWN) {
+                downKeyPressed = false;
+            }
+            if (evt.keyCode == LEFT) {
+                leftKeyPressed = false;
+            }
+            if (evt.keyCode == SPACEKEY) {
+                spaceKeyPressed = false;
+
+            }
+        }
+        
+        function enemySetUp(){
+            for(i=0; i< enemyCount * level; i++){
+                drawMakeEnemies();
+            }
+        }
+
+        function drawEverything() {
+            colorRect(0, 0, canvas.width, canvas.height, 'black');
+            colorRect(shipXpos, shipYpos, SHIP_SIZE, SHIP_SIZE, "rgb(" + r + "," + g + "," + b + ")");
+            //colorRect(bulletXpos, bulletYpos, BULLET_WIDTH, BULLET_HEIGHT, "white");
+        }
+        
+        function drawMakeEnemies(){
+            var eWidth = Math.floor(Math.random()*(50 -20) + 1);
+            var eHeight = Math.floor(Math.random()*(50 -20) + 1);
+            var eXpos = Math.random()* canvas.width - eWidth;
+            var eYpos =  0 + eHeight;
+            var eYspeed = 5;
+            var eXspeed = 5;
+            var delay = 5;
+            var delayRate = 0.1;
+            var color = 'red';
+            
+            var e = new Enemy(eXpos,eYpos,eWidth,eHeight,color,eXspeed,eYspeed, delay, delayRate);
+            
+            enemies.push(e);
+            
+        }
+
+        class Enemy{
+            constructor(x,y,w,h,c,xSpeed,ySpeed, delay, delayRate){
+                this.x = x;
+                this.y = y;
+                this.w = w;
+                this.h = h;
+                this.c = c;
+                this.xSpeed = xSpeed;
+                this.ySpeed = ySpeed;
+                this.delay = delay;
+                this.delayRate = delayRate;
+                
+            }
+            drawingEnemy(){
+            canvasContext.fillStyle = this.c;
+            canvasContext.fillRect(this.x, this.y, this.w, this.h);
+            }
+        enemyMove(){
+            this.y += this.ySpeed;
+            this.x += this.xSpeed;
+            if(this.x > canvas.width - this.w){
+               this.xSpeed *= -1;
+               }
+            if(this.x < 0){
+               this.xSpeed *= -1;
+               }
+            if(this.y > canvas.height) {
+                this.y = 0 -this.h;
+            }
+        }
+        }
+        
+        
+        
+        
+        class bullet{
+            constructor(x,y,w,h,c,ySpeed) {
+                this.x = x;
+                this.y = y;
+                this.w = w;
+                this.h = h;
+                this.c = c;
+                this.ySpeed = ySpeed;
+            }
+            drawingBullet(){
+            canvasContext.fillStyle = this.c;
+            canvasContext.fillRect(this.x, this.y, this.w, this.h);
+            }
+            move(){
+                this.y -= this.ySpeed;
+            }
+            outOfBounds(){
+                return this.y < 0 || this.y > canvas.height || this.x < 0|| this.x > canvas.width;
+            }
+            hasHitItem(item){
+                return ((this.x + this.w) >= item.x 
+                        && this.x <= (item.x + item.w))//xcollision
+                
+                        && (this.y >=item.y 
+                        && this.y <=(item.y + item.h));//ycollision
+                       
+            }
+            hasHitEnemy(enemy) {
+                return this.hasHitItem(enemy);
+            }
+            hasCollided(){
+                var self = this;
+                var collided = false;
+                
+                enemies.forEach(function(enemy, i) {
+                    if(self.hasHitEnemy(enemy)) {
+                        delete enemies[i];
+                        collided = true;
+                    }
+                });
+                enemies = enemies.filter(item => item !== undefined);
+                return collided;
+            }
+        }
+        
+        function colorRect(x, y, w, h, color) {
+            canvasContext.fillStyle = color;
+            canvasContext.fillRect(x, y, w, h);
+        }
+
+        function shipMovement() {
+
+            if (upKeyPressed) {
+                shipYpos -= shipYSpeed;
+                if(shipYpos < 0) {
+                    shipYpos = canvas.height;
+                }
+            }
+
+            if (downKeyPressed) {
+                shipYpos += shipYSpeed;
+                if(shipYpos > canvas.height - SHIP_SIZE) {
+                    shipYpos = 0;
+                }
+            }
+
+            if (leftKeyPressed) {
+                shipXpos -= shipXSpeed;
+            if(shipXpos < 0) {
+                    shipXpos = canvas.width;
+                }
+            }
+            if (rightKeyPressed) {
+                shipXpos += shipXSpeed;
+            if(shipXpos > canvas.width) {
+                    shipXpos = 0;
+                }
+            }
+            
+        }
+        
+        function drawMake(){
+           
+            const BULLET_WIDTH = 5;
+            const BULLET_HEIGHT = 12;
+            var bulletXpos = shipXpos + SHIP_SIZE/2 - BULLET_WIDTH/2;
+            var bulletYpos = shipYpos - BULLET_HEIGHT;;
+            var bulletYspeed = 5;
+            
+            var b = new bullet(bulletXpos,bulletYpos,BULLET_WIDTH,BULLET_HEIGHT,'white',bulletYspeed);
+            
+            bullets.push(b);
+        }
+        
+//        function bulletMove(){
+//            bullets.forEach(function(item,index) {
+//                item.bulletYpos += item.bulletYSpeed
+//                if(item.bulletYpos < 0 - item.BULLET_HEIGHT){
+//                    delete bullets[index];
+//                }
+//            });
+//            bullets = bullets.filter(item => item !== undefined)
+//        }
+        
+//        function drawBullets(){
+//            bullets.forEach(function(item,index){
+//                colorRect(item.bulletXpos, item.bulletYpos, item.BULLET_WIDTH,                            item.BULLET_HEIGHT, "white");
+//            });
+//            
+//        }
+
+        function refresh() {
+            if (r < 355 && rd == true) {
+                r = r + 1;
+                if (r >= 355) {
+                    rd = false;
+                }
+            }
+            if (g < 355 && gd == true) {
+                g = g + 1;
+                if (g >= 355) {
+                    gd = false;
+                }
+            }
+            if (b < 355 && bd == true) {
+                b = b + 1;
+                if (b >= 355) {
+                    bd = false;
+                }
+            }
+
+            if (rd == false) {
+                r = r - 1;
+                if (r <= 0) {
+                    rd = true;
+                    r = Math.floor(Math.random(40, 330) * 100);
+                }
+            }
+            if (gd == false) {
+                g = g - 1;
+                if (g <= 0) {
+                    gd = true;
+                    r = Math.floor(Math.random(40, 330) * 100);
+                }
+            }
+            if (bd == false) {
+                b = b - 1;
+                if (b <= 0) {
+                    bd = true;
+                    r = Math.floor(Math.random(40, 330) * 100);
+                }
+            }
+        }
+
+     /*   function bulletShoot(
+     ) {
+            if (spaceKeyPressed == true && shooting == false) {
+                bulletXpos = shipXpos + SHIP_SIZE / 2 - BULLET_WIDTH / 2;
+                bulletYpos = shipYpos - BULLET_HEIGHT;
+                shooting = true;
+            }
+            if (shooting) {
+                bulletYpos += bulletYspeed;
+                if (bulletYpos < 0 - BULLET_HEIGHT) {
+                    bulletYpos = 0;
+                    bulletXpos = 0;
+                    shooting = false;
+
+                }
+            }
+        }*/
+    </script>
+</body>
+</html>
+
