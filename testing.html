@@ -17,8 +17,6 @@
         canvas = document.getElementById('gameCanvas');
         canvasContext = canvas.getContext('2d');
         
-//            document.addEventListener('keydown', keyPressed);
-//            document.addEventListener('keyup', keyReleased);
         setInterval(mainLoop, 1000/50);
     }
 
@@ -30,21 +28,6 @@
 
         var player= [];
        
-//        var playerWidth = 20;
-//        var playerHeight = 20;
-//        var playerSpeed = 5;
-//        var playerXpos = 0;
-//        var playerYpos = 400 - playerHeight - 5;
-    
-//        const RIGHT = 39;
-//        const LEFT = 37;
-//
-//
-//        var upKeyPressed = false;
-//        var rightKeyPressed = false;
-//        var downKeyPressed = false;
-//        var leftKeyPressed = false;
-//        var spaceKeyPressed = false;
     
 var pXpos = 0;
 var pYpos = 0;
@@ -58,8 +41,7 @@ var pXspeed = 4;
     
     function mainLoop() {
         colorRect(0,0,canvas.width,canvas.height,"black");
-//        colorRect(playerXpos,playerYpos,playerWidth,playerHeight,"white")
-     //   shipMovement();
+
        ship.drawingPlayer();
        ship.movePlayer();
          
@@ -73,8 +55,7 @@ var pXspeed = 4;
              item.drawingEnemy();
                 item.enemyDrop();
                 item.enemyMove();
-//                item.eXspeed++;
-//               item.x += item.xSpeed;
+
             });
         }
             
@@ -84,46 +65,10 @@ function setUp(){
     for(i=0;i< enemyTotal;i++){
         drawMakeEnemies();
     }
-//    drawMakePlayer();
+
         
 }    
-//     function keyPressed(evt) {
-//            if (evt.keyCode == RIGHT) {
-//                rightKeyPressed = true;
-//            }
-//
-//            if (evt.keyCode == LEFT) {
-//                leftKeyPressed = true;
-//            }
-//        }
-//
-//        function keyReleased(evt) {
-//
-//            if (evt.keyCode == RIGHT) {
-//                rightKeyPressed = false;
-//            }
-//
-//            if (evt.keyCode == LEFT) {
-//                leftKeyPressed = false;
-//            }
-//
-//        }
-//            function shipMovement() {
-//
-//            if (leftKeyPressed) {
-//                playerXpos -= playerSpeed;
-//            if(playerXpos < 0) {
-//                    playerXpos = canvas.width;
-//                }
-//            }
-//            if (rightKeyPressed) {
-//                playerXpos += playerSpeed;
-//            if(playerXpos > canvas.width) {
-//                    playerXpos = 0;
-//                }
-//            }
-//            
-//        }
+
     function colorRect(x,y,w,h,color) {
         canvasContext.fillStyle = color;
         canvasContext.fillRect(x,y,w,h);
