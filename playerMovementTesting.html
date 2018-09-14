@@ -53,6 +53,7 @@
         colorRect(0,0,canvas.width,canvas.height,"black");
        ship.drawingPlayer();
        ship.movePlayer();
+
          
         if(settingUp){
             setUp();
@@ -66,8 +67,24 @@
                 item.enemyMove();
             });
         }
+        
+        if(bullets.length > 0){
+            bullets.forEach(function(item,index){
+             item.drawingBullet();
+            item.bulletMove();
+            if(item.outOfBounds() || item.hasCollided()){
+                    delete bullets[index];
+                }
+                    });
+                bullets = bullets.filter(item => item !== undefined);
+               }
+        }
+        
+        if(spaceKeyPressed && shooting) {
+            shooting = false;  
+
+        }
             
-    }
     
 function setUp(){
     for(i=0;i< enemyTotal;i++){
@@ -78,9 +95,8 @@ function setUp(){
 }    
         const RIGHT = 39;
         const LEFT = 37;
-        var upKeyPressed = false;
+        const SPACE = 32;
         var rightKeyPressed = false;
-        var downKeyPressed = false;
         var leftKeyPressed = false;
         var spaceKeyPressed = false;
     
@@ -91,6 +107,11 @@ function setUp(){
 
             if (evt.keyCode == LEFT) {
                 leftKeyPressed = true;
+            }
+            if (evt.keyCode == SPACE) {
+                drawBullet();
+                spaceKeyPressed = true;
+                shooting = true;
             }
         }
 
@@ -106,13 +127,6 @@ function setUp(){
 
         }
 
-    if(bullets.length > 0){
-                    bullets.forEach(function(item,index){
-                            item.drawingBullet();
-                            item.move();
-                    });
-                bullets = bullets.filter(item => item !== undefined);
-               }
     
     
     
