@@ -1,30 +1,47 @@
 class Player {
-    constructor(x,y,w,h,c,xSpeed,delay,delayRate) {
+    constructor(src,sx,sy,sw,sh,x,y,w,h,xSpeed) {
                 this.x = x;
                 this.y = y;
                 this.w = w;
                 this.h = h;
-                this.c = c;
+                this.src = src;
+                this.sx = sx;
+                this.sy = sy;
+                this.sw = sw;
+                this.sh = sh;
                 this.xSpeed = xSpeed;
-                this.delay = delay;
-                this.delayRate = delayRate;
                  }
     
-        drawingPlayer() {
-            canvasContext.fillStyle = this.c;
-            canvasContext.fillRect(this.x, this.y, this.w, this.h);
+//    constructor(x,y,w,h,c,xSpeed,delay,delayRate) {
+//                this.x = x;
+//                this.y = y;
+//                this.w = w;
+//                this.h = h;
+//                this.c = c;
+//                this.xSpeed = xSpeed;
+//                this.delay = delay;
+//                this.delayRate = delayRate;
+//                 }
+    
+//        drawingPlayer() {
+//            canvasContext.fillStyle = this.c;
+//            canvasContext.fillRect(this.x, this.y, this.w, this.h);
+//        }
+        drawplayerImage(){
+            canvasContext.drawImage(this.src, this.sx,this.sy,this.sw,this.sh,this.x,this.y,this.w,this.h);
         }
     
         movePlayer(){
-            if(leftKeyPressed){
+            console.log(this.x)
+            if(leftKeyPressed ){
                 this.x -= this.xSpeed;
-            if(this.x < 0) {
-                this.x = 400;
-            }
+                if(this.x < 0) {
+                    this.x = canvas.width;
+                }
             }
             if(rightKeyPressed) {
                 this.x += this.xSpeed;
-                if(this.x > 400){
+                if(this.x > canvas.width){
                     this.x = 0;
                 }
             }
@@ -32,10 +49,10 @@ class Player {
 }
 
 
-function drawMakePlayer() {
-    
-        var p = new Player(pXpos, pYpos, WIDTH, HEIGHT, color, pXspeed);
-
-        player.push(p);
-
-    }
+//function drawMakePlayer() {
+//    
+//        var p = new Player(pXpos, pYpos, WIDTH, HEIGHT, color, pXspeed);
+//
+//        player.push(p);
+//
+//    }

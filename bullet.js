@@ -46,13 +46,13 @@ class bullet{
 
 function drawBullet(){
 
-            const BULLET_WIDTH = 5;
+            const BULLET_WIDTH = 3;
             const BULLET_HEIGHT = 12;
             var bulletXpos = ship.x + WIDTH/2 - BULLET_WIDTH/2;
             var bulletYpos = ship.y - BULLET_HEIGHT;
             var bulletYspeed = 5;
              
-            var b = new bullet(bulletXpos,bulletYpos,BULLET_WIDTH,BULLET_HEIGHT,'white',bulletYspeed);
+            var b = new bullet(bulletXpos,bulletYpos,BULLET_WIDTH,BULLET_HEIGHT,'rgb(0,255 ,1',bulletYspeed);
             
             bullets.push(b);
 
