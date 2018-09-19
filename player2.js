@@ -11,22 +11,7 @@ class Player {
                 this.sh = sh;
                 this.xSpeed = xSpeed;
                  }
-    
-//    constructor(x,y,w,h,c,xSpeed,delay,delayRate) {
-//                this.x = x;
-//                this.y = y;
-//                this.w = w;
-//                this.h = h;
-//                this.c = c;
-//                this.xSpeed = xSpeed;
-//                this.delay = delay;
-//                this.delayRate = delayRate;
-//                 }
-    
-//        drawingPlayer() {
-//            canvasContext.fillStyle = this.c;
-//            canvasContext.fillRect(this.x, this.y, this.w, this.h);
-//        }
+
         drawplayerImage(){
             canvasContext.drawImage(this.src, this.sx,this.sy,this.sw,this.sh,this.x,this.y,this.w,this.h);
         }
@@ -48,11 +33,3 @@ class Player {
         }
 }
 
-
-//function drawMakePlayer() {
-//    
-//        var p = new Player(pXpos, pYpos, WIDTH, HEIGHT, color, pXspeed);
-//
-//        player.push(p);
-//
-//    }

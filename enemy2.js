@@ -1,16 +1,23 @@
     class Enemy {
-        constructor(x, y, w, h, c, xSpeed, ySpeed, delay, delayRate) {
-            this.x = x;
-            this.y = y;
-            this.w = w;
-            this.h = h;
-            this.c = c;
-            this.xSpeed = xSpeed;
-            this.ySpeed = ySpeed;
-            this.delay = delay;
-            this.delayRate = delayRate;
 
+    constructor(src,sx,sy,sw,sh,x,y,w,h,xSpeed) {
+                this.x = x;
+                this.y = y;
+                this.w = w;
+                this.h = h;
+                this.src = src;
+                this.sx = sx;
+                this.sy = sy;
+                this.sw = sw;
+                this.sh = sh;
+                this.xSpeed = xSpeed;
+                 }
+    
+
+        drawingEnemy(){
+            canvasContext.drawImage(this.src, this.sx,this.sy,this.sw,this.sh,this.x,this.y,this.w,this.h);
         }
+    
         enemyMove(){
             this.x += this.xSpeed;
         }
@@ -23,27 +30,25 @@
             
         }
   
-        drawingEnemy() {
-            canvasContext.fillStyle = this.c;
-            canvasContext.fillRect(this.x, this.y, this.w, this.h);
-        }
 
     }
 
     function drawMakeEnemies() {
   
-        var eWidth = 10;
-        var eHeight = 10;
+        var eWidth = 35;
+        var eHeight = 33;
         var eXpos = enemyCount * (eWidth + eGap);
         var eYpos = 0 + eHeight;
         var eYspeed = 1;
         var eXspeed = 1;
         var delay = 5;
+        var sourceX = 50;
+        var sourceY = 31;
         var delayRate = 0.1;
         var color = 'red';
       
 
-        var e = new Enemy(eXpos, eYpos, eWidth, eHeight, color, eXspeed, eYspeed, delay, delayRate);
+        var e = new Enemy(enemy, 0, 0, sourceX, sourceY, eXpos, eYpos, eWidth, eHeight,eXspeed);
 
         enemies.push(e);
           enemyCount++;

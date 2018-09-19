@@ -11,96 +11,107 @@
     <canvas id="gameCanvas" width="400" height="400"></canvas>
     <script src="enemy2.js"></script>
     <script src="player2.js"></script>
-        <script src="bullet.js"></script>
-<script>
-    var canvas, canvasContext;
-    
-     window.onload = function(){
-        canvas = document.getElementById('gameCanvas');
-        canvasContext = canvas.getContext('2d');
-        
+    <script src="bullet.js"></script>
+    <script>
+        var canvas, canvasContext;
+
+
+
+        window.onload = function() {
+            canvas = document.getElementById('gameCanvas');
+            canvasContext = canvas.getContext('2d');
+
+
             document.addEventListener('keydown', keyPressed);
             document.addEventListener('keyup', keyReleased);
-        setInterval(mainLoop, 1000/50);
-    }
+            setInterval(mainLoop, 1000 / 50);
+        }
 
+
+                var ship = new Image();
+                ship.src = 'images/ship.png';
+                var enemy = new Image();
+                enemy.src = 'images/invaders.png';
+        
         var enemies = [];
         var settingUp = true;
         var enemyCount = 0;
-        var enemyTotal = 22;
-        var eGap = 8;
+        var enemyTotal =11;
+        var eGap = 0;
 
-        var player= [];
-            var shooting = false;
-        
-        var bullets = []; 
-       
+        var player = [];
+        var shooting = false;
 
-        const WIDTH = 30; 
-        const HEIGHT = 30;
+        var bullets = [];
+
+
+        const WIDTH = 40;
+        const HEIGHT = 25;
         var pXspeed = 4;
         var pXpos = 0;
-        var pYpos = 400 - HEIGHT -4;
-        var pWidth = 10;
-        var pHeight = 10;
+        var pYpos = 400 - HEIGHT - 4;
+        var pWidth = 70;
+        var pHeight = 113;
         var color = 'white';
-    
-    var ship = new Player(pXpos,pYpos,WIDTH,HEIGHT,'white',pXspeed,0,0);
-    
-    
-    
-    function mainLoop() {
-        colorRect(0,0,canvas.width,canvas.height,"black");
-       ship.drawingPlayer();
-       ship.movePlayer();
+        
+        var settingUp = true;
 
-         
-        if(settingUp){
-            setUp();
-            settingUp = false;
-           }
+
+       var ship = new Player(ship, 0, 0, pHeight, pWidth, pXpos, pYpos, WIDTH, HEIGHT,pXspeed);
+
         
-        if(enemies.length > 0){
-            enemies.forEach(function(item,index){
-             item.drawingEnemy();
-                item.enemyDrop();
-                item.enemyMove();
-            });
-        }
-        
-        if(bullets.length > 0){
-            bullets.forEach(function(item,index){
-             item.drawingBullet();
-            item.bulletMove();
-            if(item.outOfBounds() || item.hasCollided()){
-                    delete bullets[index];
-                }
-                    });
+        function mainLoop() {
+            colorRect(0, 0, canvas.width, canvas.height, "black");
+
+            ship.drawplayerImage();
+            ship.movePlayer()
+
+
+            if (settingUp) {
+                setUp();
+                settingUp = false;
+            }
+
+            if (enemies.length > 0) {
+                enemies.forEach(function(item, index) {
+                    item.drawingEnemy();
+                    item.enemyDrop();
+                    item.enemyMove();
+                });
+            }
+
+            if (bullets.length > 0) {
+                bullets.forEach(function(item, index) {
+                    item.drawingBullet();
+                    item.bulletMove();
+                    if (item.outOfBounds() || item.hasCollided()) {
+                        delete bullets[index];
+                    }
+                });
                 bullets = bullets.filter(item => item !== undefined);
-               }
+            }
         }
-        
-        if(spaceKeyPressed && shooting) {
-            shooting = false;  
+
+        if (spaceKeyPressed && shooting) {
+            shooting = false;
 
         }
-            
-    
-function setUp(){
-    for(i=0;i< enemyTotal;i++){
-        drawMakeEnemies();
-    }
-    drawMakePlayer();
+
+
+        function setUp() {
+            for (i = 0; i < enemyTotal; i++) {
+                drawMakeEnemies();
+            }
+        }
         
-}    
         const RIGHT = 39;
         const LEFT = 37;
         const SPACE = 32;
         var rightKeyPressed = false;
         var leftKeyPressed = false;
         var spaceKeyPressed = false;
-    
-         function keyPressed(evt) {
+
+        function keyPressed(evt) {
             if (evt.keyCode == RIGHT) {
                 rightKeyPressed = true;
             }
@@ -127,13 +138,11 @@ function setUp(){
 
         }
 
-    
-    
-    
-    function colorRect(x,y,w,h,color) {
-        canvasContext.fillStyle = color;
-        canvasContext.fillRect(x,y,w,h);
-    }
-</script>
-    </body>
+
+        function colorRect(x, y, w, h, color) {
+            canvasContext.fillStyle = color;
+            canvasContext.fillRect(x, y, w, h);
+        }
+    </script>
+</body>
 </html>
