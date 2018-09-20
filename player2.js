@@ -17,7 +17,7 @@ class Player {
         }
     
         movePlayer(){
-            console.log(this.x)
+//            console.log(this.x)
             if(leftKeyPressed ){
                 this.x -= this.xSpeed;
                 if(this.x < 0) {

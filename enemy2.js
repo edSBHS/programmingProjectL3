@@ -20,6 +20,7 @@
     
         enemyMove(){
             this.x += this.xSpeed;
+            
         }
         enemyDrop(){
             if(this.x > canvas.width - this.w || this.x < 0){
@@ -36,9 +37,9 @@
     function drawMakeEnemies() {
   
         var eWidth = 35;
-        var eHeight = 33;
+        var eHeight = 30;
         var eXpos = enemyCount * (eWidth + eGap);
-        var eYpos = 0 + eHeight;
+        var eYpos = 0;
         var eYspeed = 1;
         var eXspeed = 1;
         var delay = 5;

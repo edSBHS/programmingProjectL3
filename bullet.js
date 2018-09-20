@@ -27,6 +27,7 @@ class bullet{
             }
             hasHitEnemy(enemy) {
                 return this.hasHitItem(enemy);
+
             }
             hasCollided(){
                 var self = this;
@@ -39,8 +40,10 @@ class bullet{
                     }
                 });
                 enemies = enemies.filter(item => item !== undefined);
+
                 return collided;
             }
+
         }        
     
 
