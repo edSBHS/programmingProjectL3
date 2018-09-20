@@ -54,9 +54,8 @@ function drawBullet(){
             var bulletXpos = ship.x + WIDTH/2 - BULLET_WIDTH/2;
             var bulletYpos = ship.y - BULLET_HEIGHT;
             var bulletYspeed = 5;
-             
+    
             var b = new bullet(bulletXpos,bulletYpos,BULLET_WIDTH,BULLET_HEIGHT,'rgb(0,255 ,1',bulletYspeed);
-            
-            bullets.push(b);
 
+            bullets.push(b);
         }

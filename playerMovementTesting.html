@@ -32,6 +32,8 @@
                 ship.src = 'images/ship.png';
                 var enemy = new Image();
                 enemy.src = 'images/invaders.png';
+                var enemy2 = new Image();
+                enemy2.src = 'images/invaders2.png';
         
         var enemies = [];
         var settingUp = true;
@@ -43,6 +45,8 @@
         var shooting = false;
 
         var bullets = [];
+        var enemyBullet = [];
+        
         var enemySprites = [];
         var enemyimgFrameX = 0;
         var enemyimgFrameY = 0;
@@ -86,6 +90,7 @@
             if (bullets.length > 0) {
                 bullets.forEach(function(item, index) {
                     item.drawingBullet();
+
                     item.bulletMove();
                     if (item.outOfBounds() || item.hasCollided()) {
                         delete bullets[index];
@@ -95,6 +100,7 @@
                 bullets = bullets.filter(item => item !== undefined);
             
             }
+            
         }
 
         if (spaceKeyPressed && shooting) {
