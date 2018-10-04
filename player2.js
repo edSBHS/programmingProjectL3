@@ -32,4 +32,32 @@ class Player {
             }
         }
 }
-
+        const RIGHT = 39;
+        const LEFT = 37;
+        const SPACE = 32;
+        var rightKeyPressed = false;
+        var leftKeyPressed = false;
+        var spaceKeyPressed = false;
+        function keyPressed(evt) {
+            if (evt.keyCode == RIGHT) {
+                rightKeyPressed = true;
+            }
+            if (evt.keyCode == LEFT) {
+                leftKeyPressed = true;
+            }
+            if (evt.keyCode == SPACE) {
+                drawBullet();
+//                drawEnemyBullet();
+                spaceKeyPressed = true;
+                //shooting = true;
+            }
+        }
+        function keyReleased(evt) {
+            if (evt.keyCode == RIGHT) {
+                rightKeyPressed = false;
+            }
+            if (evt.keyCode == LEFT) {
+                leftKeyPressed = false;
+            }
+        }
+        

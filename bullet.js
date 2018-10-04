@@ -37,11 +37,14 @@ class bullet{
                     if(self.hasHitEnemy(enemy)) {
                         delete enemies[i];
                         collided = true;
+                        scoreIncrease = true;
+                        console.log("ello");
                     }
                 });
                 enemies = enemies.filter(item => item !== undefined);
 
                 return collided;
+                
             }
 
         }        
