@@ -47,7 +47,8 @@ class Player {
             }
             if (evt.keyCode == SPACE) {
                 drawBullet();
-//                drawEnemyBullet();
+                
+                //drawEnemyBullet();
                 spaceKeyPressed = true;
                 //shooting = true;
             }

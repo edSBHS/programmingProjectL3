@@ -19,19 +19,31 @@ class enemyBullet{
         }
      outOfBounds(){
                 return this.y > canvas.height;
-            }
 
         }        
     
-var enemyBulletXpos = Math.floor((Math.random() * 400) + 1);
+}
+
 function drawEnemyBullet(){
 
             const ENEMY_BULLET_WIDTH = 3;
             const ENEMY_BULLET_HEIGHT = 12;
             var enemyBulletYpos = 0;
             var enemyBulletYspeed = 5;
+    
+        var bulletTotal = 4;
             //console.log(enemyBulletXpos);
+    
+        for(i=0;i<bulletTotal;i++){
+            var enemyBulletXpos = Math.floor((Math.random() * 400) + 1);
+//            var bulletSpacing = 0;
             var eb = new enemyBullet(enemyBulletXpos,enemyBulletYpos,ENEMY_BULLET_WIDTH,ENEMY_BULLET_HEIGHT,"white",enemyBulletYspeed);
+            bulletSpacing = 10;
+            
 
+//            var eb2 = new enemyBullet(enemyBulletXpos-bulletSpacing,enemyBulletYpos,ENEMY_BULLET_WIDTH,ENEMY_BULLET_HEIGHT,"white",enemyBulletYspeed);
+    
+           // enemybullets.push(eb2);
             enemybullets.push(eb);
+        }
         }

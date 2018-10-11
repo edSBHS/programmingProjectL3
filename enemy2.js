@@ -22,7 +22,6 @@
    
         enemyMove(){
             
-             
             if(Math.floor(changeDelay) >= 10){
                 this.sx = 0;
             if(Math.floor(changeDelay) >= 20){
@@ -38,11 +37,10 @@
                 this.delay = 0;
                 this.sx = 0;
                 changeDelay += 1;
-//                console.log(Math.floor(changeDelay));
+                //console.log(Math.floor(changeDelay));
                 
             }
 
-            
         }
 
         enemyDrop(){
@@ -72,13 +70,27 @@
         var eXspeed = 6;
         var delay = 0;
         var delayRate = 0.1;
-      
+//       var e2Xpos = enemyCount * (eWidth + eGap) ;
+//        var e2Ypos = eHeight *2 + 10;
+//        var sourceX2 = 100;
+//        var sourceY2 = 100;
+//        var e2Width = 35;
+//        var e2Height = 30;
+        
+   
+        //this.src, this.sx,this.sy,this.sw,this.sh,this.x,this.y,this.w,this.h
+        var e = new Enemy(enemy, sourceX, sourceY ,sourceW, sourceH, eXpos, eYpos, eWidth, eHeight,eXspeed,delay,delayRate);
+//        var e2 = new Enemy(enemy2, 0,0,sourceX2,sourceY2,e2Xpos,e2Ypos,e2Width,e2Height,eXspeed,delay,delayRate);
+       // enemies.push(e2);
+        enemies.push(e);
+          enemyCount++;
+    }
 
         
    
  
-        var e = new Enemy(enemy, sourceX, sourceY ,sourceW, sourceH, eXpos, eYpos, eWidth, eHeight,eXspeed,delay,delayRate);
-
-        enemies.push(e);
-          enemyCount++;
-    }
+//        var e = new Enemy(enemy, sourceX, sourceY ,sourceW, sourceH, eXpos, eYpos, eWidth, eHeight,eXspeed,delay,delayRate);
+//
+//        enemies.push(e);
+//          enemyCount++;
+//    }
