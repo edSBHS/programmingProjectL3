@@ -19,8 +19,9 @@ class enemyBullet{
         }
      outOfBounds(){
                 return this.y > canvas.height;
-
         }        
+     
+
     
 }
 

@@ -15,7 +15,7 @@ class bullet{
             this.y -= this.ySpeed;
         }
      outOfBounds(){
-                return this.y < 0 || this.y > canvas.height || this.x < 0|| this.x > canvas.width;
+                return this.y < 0 || this.y > canvas.height /*|| this.x < 0|| this.x > canvas.width*/;
             }
             hasHitItem(item){
                 return ((this.x + this.w) >= item.x 
@@ -38,7 +38,7 @@ class bullet{
                         delete enemies[i];
                         collided = true;
                         scoreIncrease = true;
-                        console.log("ello");
+                        //console.log("ello");
                     }
                 });
                 enemies = enemies.filter(item => item !== undefined);

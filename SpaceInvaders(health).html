@@ -13,12 +13,14 @@
     <script src="player2.js"></script>
     <script src="bullet.js"></script>
     <script src="enemyBullet.js"></script>
+    <script src="health.js"></script>
+    <script src="drawSetUp.js"></script>
     <script>
-        var canvas, canvasContext/*, imageAssests*/;
+        var canvas, canvasContext, imageAssests;
         window.onload = function() {
             canvas = document.getElementById('gameCanvas');
             canvasContext = canvas.getContext('2d');
-//            imageAssests = loadImgAssests();
+            imageAssests = loadImgAssests();
             document.addEventListener('keydown', keyPressed);
             document.addEventListener('keyup', keyReleased);
             setInterval(mainLoop, 1000 / 50);
@@ -31,14 +33,7 @@
                 var enemy2 = new Image();
                 enemy2.src = 'images/invaders2.jpg';
             
-//    function loadImgAssests() {
-//        imgs = {};
-//        
-//        imgs.player = new Image();
-//        imgs.player.src = "images/ship.jpg";
-//        
-//        return imgs;
-//            }
+
            var changeDelay = 0;
         var enemySprite = false;
         var enemies = [];
@@ -67,12 +62,7 @@
         var pHeight = 113;
         var color = 'white';
         
-//        var healthImgWidth = 20;
-//        var healthImgHeight = 20;
-//        var health1Xpos = 10;
-//        var health2Xpos = 2;
-//        var health3Xpos = 2;
-//        var healthImgGap = 5;
+
         
         var settingUp = true;
        var ship = new Player(ship, enemyimgFrameX, enemyimgFrameY, pHeight, pWidth, pXpos, pYpos, WIDTH, HEIGHT,pXspeed);
@@ -80,19 +70,17 @@
 
         
         function mainLoop() {
-            colorRect(0, 0, canvas.width, canvas.height, "black");
-            text(2,16,'white', '14pt Century Gothic',"Your score is: "  + score);
+            drawAll();
             gameWon();
             enemyBulletShooting();
-//           var one = drawImg(canvas.width-healthImgWidth-1, health1Xpos,imageAssests.player,healthImgWidth,healthImgHeight);
-//               
+            
 //            
 //           var two =  drawImg(canvas.width-healthImgWidth *2 - healthImgGap, health2Xpos,imageAssests.player,healthImgWidth,healthImgHeight);
 //            
 //            var three = drawImg(canvas.width-healthImgWidth *3 - healthImgGap *2, health3Xpos,imageAssests.player,healthImgWidth,healthImgHeight);
 
             
-            ship.drawplayerImage();
+            
 //            health1.drawplayerImage();
             ship.movePlayer();
            playerScore();
@@ -116,6 +104,7 @@
                     item.bulletMove();
                     
             if (item.outOfBounds() || item.hasCollided()) {
+                
                         delete bullets[index];
                     }
  
@@ -129,6 +118,7 @@
                     item.drawingEnemyBullet();
                     
             if (item.outOfBounds()) {
+                //console.log("hi");
                         delete enemybullets[index];
                     }
                 });
@@ -139,6 +129,15 @@
 //        if (spaceKeyPressed && shooting) {
 //            shooting = false;
 //        }
+        function drawAll(){
+            colorRect(0, 0, canvas.width, canvas.height, "black");
+            text(2,16,'white', '14pt Century Gothic',"Your score is: "  + score);
+            ship.drawplayerImage();
+           var one = drawImg(canvas.width-healthImgWidth-1, health1Ypos ,imageAssests.player,healthImgWidth,healthImgHeight);
+           var two = drawImg(canvas.width-healthImgWidth*2 -2, health1Ypos,imageAssests.player,healthImgWidth,healthImgHeight);
+            var three = drawImg(canvas.width-healthImgWidth*3 -3, health1Ypos,imageAssests.player,healthImgWidth,healthImgHeight);
+
+        }
         function setUp() {
             drawEnemyBullet();
            // spriteChange();
@@ -155,13 +154,11 @@
             
             if(scoreIncrease){
                 score++;
-               console.log("your score is: " + score);
+               //console.log("your score is: " + score);
                 scoreIncrease = false;
                }
         }
-//    function drawImg(topLeftX,topLeftY,img,width,height) {
-//	   canvasContext.drawImage(img,topLeftX,topLeftY,width,height);
-//}
+
 var shootingDelay = Math.floor(Math.random() * 10); 
         //console.log(shootingDelay);
 function enemyBulletShooting(){
@@ -183,16 +180,7 @@ function gameWon(){
         colorRect(0,0,canvas.width,canvas.height,"black");
        }
 }
-    function text(topLeftX,topLeftY,color, sizeFont, message){
-        canvasContext.font = sizeFont;
-        canvasContext.fillStyle = color;
-        canvasContext.fillText(message, topLeftX, topLeftY);
-    }
 
-        function colorRect(x, y, w, h, color) {
-            canvasContext.fillStyle = color;
-            canvasContext.fillRect(x, y, w, h);
-        }
     </script>
 </body>
 </html>
