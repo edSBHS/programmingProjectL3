@@ -62,7 +62,7 @@
         var pHeight = 113;
         var color = 'white';
         
-
+        var lives = 3;
         
         var settingUp = true;
        var ship = new Player(ship, enemyimgFrameX, enemyimgFrameY, pHeight, pWidth, pXpos, pYpos, WIDTH, HEIGHT,pXspeed);
@@ -72,6 +72,7 @@
         function mainLoop() {
             drawAll();
             gameWon();
+            gameLost();
             enemyBulletShooting();
             
 //            
@@ -133,10 +134,15 @@
             colorRect(0, 0, canvas.width, canvas.height, "black");
             text(2,16,'white', '14pt Century Gothic',"Your score is: "  + score);
             ship.drawplayerImage();
+            if(lives == 3){
            var one = drawImg(canvas.width-healthImgWidth-1, health1Ypos ,imageAssests.player,healthImgWidth,healthImgHeight);
+            }
+            if(lives >=2){
            var two = drawImg(canvas.width-healthImgWidth*2 -2, health1Ypos,imageAssests.player,healthImgWidth,healthImgHeight);
+            }
+            if(lives>=1){
             var three = drawImg(canvas.width-healthImgWidth*3 -3, health1Ypos,imageAssests.player,healthImgWidth,healthImgHeight);
-
+            }
         }
         function setUp() {
             drawEnemyBullet();
@@ -154,8 +160,10 @@
             
             if(scoreIncrease){
                 score++;
+                lives--;//add when bullet collision working
                //console.log("your score is: " + score);
                 scoreIncrease = false;
+                
                }
         }
 
@@ -178,6 +186,11 @@ function gameWon(){
     if(score == 10){
         console.log("won");
         colorRect(0,0,canvas.width,canvas.height,"black");
+       }
+}
+function gameLost(){
+    if(lives <= 0){
+        text(canvas.width/2,canvas.height/2 ,'white', '14pt Century Gothic',"You lost");
        }
 }
 

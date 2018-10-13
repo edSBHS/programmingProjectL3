@@ -11,4 +11,3 @@
         var healthImgHeight = 20;
         var health1Ypos = 4;
         var healthImgGap = 5;
-

@@ -41,10 +41,10 @@ function drawEnemyBullet(){
             var eb = new enemyBullet(enemyBulletXpos,enemyBulletYpos,ENEMY_BULLET_WIDTH,ENEMY_BULLET_HEIGHT,"white",enemyBulletYspeed);
             bulletSpacing = 10;
             
-
+//
 //            var eb2 = new enemyBullet(enemyBulletXpos-bulletSpacing,enemyBulletYpos,ENEMY_BULLET_WIDTH,ENEMY_BULLET_HEIGHT,"white",enemyBulletYspeed);
-    
-           // enemybullets.push(eb2);
+//    
+//            enemybullets.push(eb2);
             enemybullets.push(eb);
         }
         }
