@@ -46,7 +46,12 @@ class Player {
                 leftKeyPressed = true;
             }
             if (evt.keyCode == SPACE) {
-                drawBullet();
+                if(playerBulletDelay){
+                   drawBullet();
+                    playerBulletDelay = false;
+                    console.log(playerBulletDelay );
+                   }
+                
                 
                 //drawEnemyBullet();
                 spaceKeyPressed = true;

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sprite Movement</title>
 </head>
-
+<!--    the enemy bullet contact and second enemy sprite change-->
 <body>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
     <script src="enemy2.js"></script>
@@ -32,7 +32,8 @@
                 enemy.src = 'images/invaders.png';
                 var enemy2 = new Image();
                 enemy2.src = 'images/invaders2.jpg';
-            
+              var enemy3 = new Image();
+                enemy3.src = 'images/invaders3.jpg';
 
            var changeDelay = 0;
         var enemySprite = false;
@@ -61,7 +62,7 @@
         var pWidth = 70;
         var pHeight = 113;
         var color = 'white';
-        
+        var playerBulletDelay = true;
         var lives = 3;
         
         var settingUp = true;
@@ -105,7 +106,7 @@
                     item.bulletMove();
                     
             if (item.outOfBounds() || item.hasCollided()) {
-                
+                    playerBulletDelay = true;
                         delete bullets[index];
                     }
  
@@ -156,36 +157,21 @@
                 enemySprites[i][1] = 0;
             }
         }
-        function playerScore() {
-            
+        
+function playerScore() {
             if(scoreIncrease){
                 score++;
                 lives--;//add when bullet collision working
                //console.log("your score is: " + score);
-                scoreIncrease = false;
-                
+                scoreIncrease = false;   
                }
         }
 
-var shootingDelay = Math.floor(Math.random() * 10); 
-        //console.log(shootingDelay);
-function enemyBulletShooting(){
-    
-    if(shootingDelay <= Math.floor(Math.random() * 20) + 10){
-        shootingDelay = shootingDelay + 0.1;
-        
-        
-       }
-    else{
-       // console.log(shootingDelay);
-        drawEnemyBullet();
-        shootingDelay = 0;
-    }
-}
 function gameWon(){
-    if(score == 10){
+    if(score == enemyTotal){
         console.log("won");
         colorRect(0,0,canvas.width,canvas.height,"black");
+        text(0,0 ,'white', '14pt Century Gothic',"You won!");
        }
 }
 function gameLost(){

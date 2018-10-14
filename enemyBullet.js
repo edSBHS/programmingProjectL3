@@ -24,6 +24,22 @@ class enemyBullet{
 
     
 }
+var shootingDelay = Math.floor(Math.random() * 10); 
+        //console.log(shootingDelay);
+function enemyBulletShooting(){
+    
+    if(shootingDelay <= Math.floor(Math.random() * 20) + 10){
+        shootingDelay = shootingDelay + 0.1;
+        
+        
+       }
+    else{
+       // console.log(shootingDelay);
+        drawEnemyBullet();
+        shootingDelay = 0;
+    }
+}
+
 
 function drawEnemyBullet(){
 
@@ -32,7 +48,7 @@ function drawEnemyBullet(){
             var enemyBulletYpos = 0;
             var enemyBulletYspeed = 5;
     
-        var bulletTotal = 4;
+        var bulletTotal = Math.floor((Math.random() * 4) + 1);
             //console.log(enemyBulletXpos);
     
         for(i=0;i<bulletTotal;i++){
