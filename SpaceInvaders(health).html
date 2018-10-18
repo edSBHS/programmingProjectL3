@@ -9,7 +9,7 @@
 <!--    the enemy bullet contact and second enemy sprite change-->
 <body>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
-    <script src="enemy2.js"></script>
+    <script src="enemy.js"></script>
     <script src="player2.js"></script>
     <script src="bullet.js"></script>
     <script src="enemyBullet.js"></script>
@@ -57,13 +57,15 @@
         const WIDTH = 40;
         const HEIGHT = 25;
         var pXspeed = 4;
-        var pXpos = 0;
+        var pXpos = 200- WIDTH;
         var pYpos = 400 - HEIGHT - 4;
         var pWidth = 70;
         var pHeight = 113;
         var color = 'white';
         var playerBulletDelay = true;
         var lives = 3;
+        
+
         
         var settingUp = true;
        var ship = new Player(ship, enemyimgFrameX, enemyimgFrameY, pHeight, pWidth, pXpos, pYpos, WIDTH, HEIGHT,pXspeed);
@@ -75,7 +77,6 @@
             gameWon();
             gameLost();
             enemyBulletShooting();
-            
 //            
 //           var two =  drawImg(canvas.width-healthImgWidth *2 - healthImgGap, health2Xpos,imageAssests.player,healthImgWidth,healthImgHeight);
 //            
@@ -85,6 +86,10 @@
             
 //            health1.drawplayerImage();
             ship.movePlayer();
+            ship.hasCollided();
+//            if(ship.hasCollided){
+//                console.log("hi");
+//            }
            playerScore();
             
             if (settingUp) {
@@ -118,6 +123,7 @@
                 enemybullets.forEach(function(item, index) {
                     item.enemyBulletMove();
                     item.drawingEnemyBullet();
+                    
                     
             if (item.outOfBounds()) {
                 //console.log("hi");
@@ -161,7 +167,7 @@
 function playerScore() {
             if(scoreIncrease){
                 score++;
-                lives--;//add when bullet collision working
+                
                //console.log("your score is: " + score);
                 scoreIncrease = false;   
                }

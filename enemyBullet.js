@@ -21,6 +21,11 @@ class enemyBullet{
                 return this.y > canvas.height;
         }        
      
+//     playerHit(){
+//         if(this.y > pYpos - HEIGHT && this.x < pXpos + WIDTH && this.x > pXpos){
+//            console.log("hi");
+//            }
+//     }
 
     
 }
