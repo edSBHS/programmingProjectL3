@@ -26,8 +26,27 @@
             setInterval(mainLoop, 1000 / 50);
 
         }
+//        var username = prompt('Welcome to Space Invaders, Enter a username');
+//var levelCheck = true;
+//var numberOfAsteroids = 0;
+////var level  = prompt('Welcome ' + username + ', What level would you like to play easy or hard?');
+//	var level  = prompt('Welcome ' + username + ', What level would you like to play easy or hard?');
+//	
+//	function checkCase() {
+//var check = level.toLowerCase();
+//	while(level != 'easy'&& level != 'hard'){
+//	level = prompt('Please enter a correct level, between easy or hard');
+//}
+//	if (level == 'easy'){
+//	numberOfAsteroids = numberOfAsteroids + 5;
+//		console.log(numberOfAsteroids);
+//	}
+//	document.getElementById("gameCanvas").innerHTML = check;
+//	levelCheck = false;
+//	
+//	}
                 var ship = new Image();
-                ship.src = 'images/ship.jpg';
+                ship.src = 'images/shipcollision.jpg';
                 var enemy = new Image();
                 enemy.src = 'images/invaders.png';
                 var enemy2 = new Image();
@@ -35,6 +54,9 @@
               var enemy3 = new Image();
                 enemy3.src = 'images/invaders3.jpg';
 
+        
+
+        var change = false;
            var changeDelay = 0;
         var enemySprite = false;
         var enemies = [];
@@ -55,16 +77,16 @@
         var enemyimgFrameX = 0;
         var enemyimgFrameY = 0;
         const WIDTH = 40;
-        const HEIGHT = 25;
+        const HEIGHT = 30;
         var pXspeed = 4;
         var pXpos = 200- WIDTH;
         var pYpos = 400 - HEIGHT - 4;
-        var pWidth = 70;
-        var pHeight = 113;
+        var pWidth = 50;
+        var pHeight = 85;
         var color = 'white';
         var playerBulletDelay = true;
         var lives = 3;
-        
+        var won, lost = false;
 
         
         var settingUp = true;
@@ -73,6 +95,10 @@
 
         
         function mainLoop() {
+            if(lost == false || won == false){
+//            if(levelCheck){	
+//	checkCase();
+//}
             drawAll();
             gameWon();
             gameLost();
@@ -99,11 +125,18 @@
             if (enemies.length > 0) {
                 enemies.forEach(function(item, index) {
                     item.drawingEnemy();
-                    item.enemyDrop();
+                    //item.enemyDrop();
                     item.enemyMove();
                 //    item.spriteChange();
                    // item.enemyChange();
                 });
+                 enemies.forEach(function(item, index){
+		   if(item.isDropDown()){				
+				for(i=0;i<enemies.length;i++){
+					enemies[i].dropDown();
+				}
+			}
+             });
             }
             if (bullets.length > 0) {
                 bullets.forEach(function(item, index) {
@@ -132,7 +165,8 @@
                 });
                 enemybullets = enemybullets.filter(item => item !== undefined);
             }
-            
+            }
+
         }
 //        if (spaceKeyPressed && shooting) {
 //            shooting = false;
@@ -159,7 +193,7 @@
             }
             for(i=0;i<2;i++){
                 enemySprites[i] = new Array(2);
-                enemySprites[i][0] = 50 * i;
+                 enemySprites[i][0] = 50 * i;
                 enemySprites[i][1] = 0;
             }
         }
@@ -171,18 +205,26 @@ function playerScore() {
                //console.log("your score is: " + score);
                 scoreIncrease = false;   
                }
-        }
+        }                 
 
 function gameWon(){
-    if(score == enemyTotal){
-        console.log("won");
+    if(score == enemyTotal * 5){
+        won = true;
+        console.log(won);
         colorRect(0,0,canvas.width,canvas.height,"black");
         text(0,0 ,'white', '14pt Century Gothic',"You won!");
        }
 }
 function gameLost(){
     if(lives <= 0){
-        text(canvas.width/2,canvas.height/2 ,'white', '14pt Century Gothic',"You lost");
+        
+        lost = true;
+        console.log(lost);
+        colorRect(0,0,canvas.width,canvas.height,"black");
+        drawImg(canvas.width/2-100, 0,imageAssests.logo,canvas.width/2,canvas.height/2);
+            
+        text(canvas.width/2-100, canvas.height - 50,'white', '14pt Century Gothic',"You lost, your score was " + score);
+//        ship.sx = 84;
        }
 }
 

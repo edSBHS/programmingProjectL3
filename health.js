@@ -4,6 +4,9 @@
         imgs.player = new Image();
         imgs.player.src = "images/ship.jpg";
         
+        imgs.logo = new Image();
+        imgs.logo.src = "images/logo.jpg";
+        
         return imgs;
             }
 

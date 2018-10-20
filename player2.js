@@ -48,20 +48,22 @@ class Player {
     hasCollided() {
         var self = this;
         var collided = false;
+      //  this.sx = 0;
 
+        
         enemybullets.forEach(function (enemybullet, i) {
             if (self.hasHitEnemy(enemybullet)) {
                 
                 if(enemybullet.y + enemybullet.h > self.y){ // has collided with playershop xy 
                    //console.log('class hit');
                     enemybullet.y = canvas.height;
+                    self.sx = 85;
+                    console.log(self.sx);
                     lives--;
                     console.log(enemybullet.y);
                     
                 }
-                
                 collided = true;
-             
             }
         });
 //        enemies = enemies.filter(item => item !== undefined); maybe move the enemy bullet to prevent overlay time issue 
@@ -80,6 +82,7 @@ var spaceKeyPressed = false;
 function keyPressed(evt) {
     if (evt.keyCode == RIGHT) {
         rightKeyPressed = true;
+        
     }
     if (evt.keyCode == LEFT) {
         leftKeyPressed = true;
@@ -101,6 +104,7 @@ function keyPressed(evt) {
 function keyReleased(evt) {
     if (evt.keyCode == RIGHT) {
         rightKeyPressed = false;
+        this.sx = 0;
     }
     if (evt.keyCode == LEFT) {
         leftKeyPressed = false;
