@@ -21,6 +21,9 @@
         }
    
         enemyMove(){
+            if(this.y >= ship.y){
+                lives = 0;
+               }
             
             
 //            if(Math.floor(changeDelay) >= 10){
@@ -88,8 +91,15 @@
         var eWidth = 35;
         var eHeight = 30;
         var eYspeed = 1;
-        var eXspeed = 6;
-        var delay = 0;
+        if(levelCaseCheck = "hard"){
+           var eXspeed = 8;
+            console.log(eXspeed);
+           }
+        else{
+            var eXspeed = 6;
+            
+        }
+           var delay = 0;
         var delayRate = 0.1;
         
         var eXpos = enemyCount * (eWidth + eGap);
@@ -131,10 +141,10 @@
         var e4 = new Enemy(enemy, sourceX, sourceY ,sourceW, sourceH, eXpos, e4Ypos, eWidth, eHeight,eXspeed,delay,delayRate);
         
         var e5 = new Enemy(enemy, sourceX, sourceY ,sourceW, sourceH, eXpos, e5Ypos, eWidth, eHeight,eXspeed,delay,delayRate);
-//        
+
 
         enemies.push(e5);  
-    
+
 enemies.push(e4);
         enemies.push(e3);
        enemies.push(e2);

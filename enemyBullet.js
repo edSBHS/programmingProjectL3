@@ -52,8 +52,12 @@ function drawEnemyBullet(){
             const ENEMY_BULLET_HEIGHT = 12;
             var enemyBulletYpos = 0;
             var enemyBulletYspeed = 5;
+    if(levelCaseCheck == "hard"){
+        var bulletTotal = Math.floor((Math.random() * 6) + 1);
+    } else {
+       var bulletTotal = Math.floor((Math.random() * 4) + 1); 
+    }
     
-        var bulletTotal = Math.floor((Math.random() * 4) + 1);
             //console.log(enemyBulletXpos);
     
         for(i=0;i<bulletTotal;i++){

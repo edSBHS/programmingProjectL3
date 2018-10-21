@@ -26,25 +26,24 @@
             setInterval(mainLoop, 1000 / 50);
 
         }
-//        var username = prompt('Welcome to Space Invaders, Enter a username');
+        var username = prompt('Welcome to Space Invaders, Enter a username');
 //var levelCheck = true;
-//var numberOfAsteroids = 0;
-////var level  = prompt('Welcome ' + username + ', What level would you like to play easy or hard?');
-//	var level  = prompt('Welcome ' + username + ', What level would you like to play easy or hard?');
-//	
-//	function checkCase() {
-//var check = level.toLowerCase();
-//	while(level != 'easy'&& level != 'hard'){
-//	level = prompt('Please enter a correct level, between easy or hard');
-//}
-//	if (level == 'easy'){
-//	numberOfAsteroids = numberOfAsteroids + 5;
-//		console.log(numberOfAsteroids);
-//	}
-//	document.getElementById("gameCanvas").innerHTML = check;
-//	levelCheck = false;
-//	
-//	}
+while(username == ""){
+    username = prompt('Welcome to Space Invaders, Enter a username');
+}
+
+	var level  = prompt('Welcome ' + username + ', What level would you like to play easy or hard?', 'Easy');
+        
+    console.log(level);
+	var levelCaseCheck = level.toLowerCase();
+    console.log(levelCaseCheck);
+    level = levelCaseCheck;
+	while(levelCaseCheck != 'easy'&& levelCaseCheck != 'hard'){
+	level = prompt('Please enter a correct level, between easy or hard','easy');
+    levelCaseCheck = level.toLowerCase();
+    }
+        console.log(levelCaseCheck);
+
                 var ship = new Image();
                 ship.src = 'images/shipcollision.jpg';
                 var enemy = new Image();
@@ -100,8 +99,8 @@
 //	checkCase();
 //}
             drawAll();
-            gameWon();
-            gameLost();
+           // gameWon();
+            gameEnd();
             enemyBulletShooting();
 //            
 //           var two =  drawImg(canvas.width-healthImgWidth *2 - healthImgGap, health2Xpos,imageAssests.player,healthImgWidth,healthImgHeight);
@@ -174,6 +173,7 @@
         function drawAll(){
             colorRect(0, 0, canvas.width, canvas.height, "black");
             text(2,16,'white', '14pt Century Gothic',"Your score is: "  + score);
+            text(150,16,'white','14pt Century Gothic', "Difficulty: " + level)
             ship.drawplayerImage();
             if(lives == 3){
            var one = drawImg(canvas.width-healthImgWidth-1, health1Ypos ,imageAssests.player,healthImgWidth,healthImgHeight);
@@ -207,24 +207,39 @@ function playerScore() {
                }
         }                 
 
-function gameWon(){
-    if(score == enemyTotal * 5){
-        won = true;
-        console.log(won);
-        colorRect(0,0,canvas.width,canvas.height,"black");
-        text(0,0 ,'white', '14pt Century Gothic',"You won!");
-       }
-}
-function gameLost(){
+//function gameWon(){
+//    if(score == enemyTotal * 5){
+//        won = true;
+//        console.log(won);
+//        colorRect(0,0,canvas.width,canvas.height,"black");
+//        text(0,0 ,'white', '14pt Century Gothic',"You won!");
+//       }
+//}
+function gameEnd(){
+  
     if(lives <= 0){
-        
+
         lost = true;
         console.log(lost);
         colorRect(0,0,canvas.width,canvas.height,"black");
         drawImg(canvas.width/2-100, 0,imageAssests.logo,canvas.width/2,canvas.height/2);
-            
+  text(canvas.width/2-100, canvas.height - 150,'white', '20pt Century Gothic',"Sorry "+ username + " you died");
+
         text(canvas.width/2-100, canvas.height - 50,'white', '14pt Century Gothic',"You lost, your score was " + score);
 //        ship.sx = 84;
+       }
+    
+     if(score == enemyTotal * 5){
+      won = true;
+        console.log(won);
+        colorRect(0,0,canvas.width,canvas.height,"black");
+        drawImg(canvas.width/2-100, 0,imageAssests.logo,canvas.width/2,canvas.height/2);
+            
+        text(canvas.width/2-100, canvas.height - 50,'white', '14pt Century Gothic',"You won, your score was " + score);
+//        won = true;
+//        console.log(won);
+//        colorRect(0,0,canvas.width,canvas.height,"black");
+//        text(0,0 ,'white', '14pt Century Gothic',"You won!");
        }
 }
 
