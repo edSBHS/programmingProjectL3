@@ -21,10 +21,18 @@
         }
    
         enemyMove(){
+            if(restart){
+//                for(i=0;i<enemies.length;i++){
+//                    delete enemies[i];
+//                }
+//                enemies = enemies.filter(item => item !== undefined);
+                console.log("check");
+                restart = false;
+               }
             if(this.y >= ship.y){
                 lives = 0;
                }
-            
+        
             
 //            if(Math.floor(changeDelay) >= 10){
 //                //console.log(this.sx);
@@ -87,6 +95,7 @@
 //    }
   }
     function drawMakeEnemies() {
+
   
         var eWidth = 35;
         var eHeight = 30;

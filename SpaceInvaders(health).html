@@ -7,6 +7,7 @@
     <title>Sprite Movement</title>
 </head>
 <!--    the enemy bullet contact and second enemy sprite change-->
+
 <body>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
     <script src="enemy.js"></script>
@@ -27,58 +28,58 @@
 
         }
         var username = prompt('Welcome to Space Invaders, Enter a username');
-//var levelCheck = true;
-while(username == ""){
-    username = prompt('Welcome to Space Invaders, Enter a username');
-}
+        //var levelCheck = true;
+        while (username == "") {
+            username = prompt('Welcome to Space Invaders, Enter a username');
+        }
 
-	var level  = prompt('Welcome ' + username + ', What level would you like to play easy or hard?', 'Easy');
-        
-    console.log(level);
-	var levelCaseCheck = level.toLowerCase();
-    console.log(levelCaseCheck);
-    level = levelCaseCheck;
-	while(levelCaseCheck != 'easy'&& levelCaseCheck != 'hard'){
-	level = prompt('Please enter a correct level, between easy or hard','easy');
-    levelCaseCheck = level.toLowerCase();
-    }
+        var level = prompt('Welcome ' + username + ', What level would you like to play easy or hard?', 'Easy');
+
+        console.log(level);
+        var levelCaseCheck = level.toLowerCase();
+        console.log(levelCaseCheck);
+        level = levelCaseCheck;
+        while (levelCaseCheck != 'easy' && levelCaseCheck != 'hard') {
+            level = prompt('Please enter a correct level, between easy or hard', 'easy');
+            levelCaseCheck = level.toLowerCase();
+        }
         console.log(levelCaseCheck);
 
-                var ship = new Image();
-                ship.src = 'images/shipcollision.jpg';
-                var enemy = new Image();
-                enemy.src = 'images/invaders.png';
-                var enemy2 = new Image();
-                enemy2.src = 'images/invaders2.jpg';
-              var enemy3 = new Image();
-                enemy3.src = 'images/invaders3.jpg';
+        var ship = new Image();
+        ship.src = 'images/player-sprites.jpg';
+        var enemy = new Image();
+        enemy.src = 'images/invaders.png';
+        var enemy2 = new Image();
+        enemy2.src = 'images/invaders2.jpg';
+        var enemy3 = new Image();
+        enemy3.src = 'images/invaders3.jpg';
 
-        
+
 
         var change = false;
-           var changeDelay = 0;
+        var changeDelay = 0;
         var enemySprite = false;
         var enemies = [];
         var settingUp = true;
         var enemyCount = 0;
-        var enemyTotal =10;
+        var enemyTotal = 10;
         //var enemySprite = false;
         var eGap = 3;
         var player = [];
-      //  var shooting = false;
+        //  var shooting = false;
         var bullets = [];
         var enemybullets = [];
-        
+
         var scoreIncrease = false;
         var score = 0;
-        
+
         var enemySprites = [];
         var enemyimgFrameX = 0;
         var enemyimgFrameY = 0;
         const WIDTH = 40;
         const HEIGHT = 30;
         var pXspeed = 4;
-        var pXpos = 200- WIDTH;
+        var pXpos = 200 - WIDTH;
         var pYpos = 400 - HEIGHT - 4;
         var pWidth = 50;
         var pHeight = 85;
@@ -86,163 +87,182 @@ while(username == ""){
         var playerBulletDelay = true;
         var lives = 3;
         var won, lost = false;
+        var restart = false; // if not using = enemies.length > 0 
 
-        
         var settingUp = true;
-       var ship = new Player(ship, enemyimgFrameX, enemyimgFrameY, pHeight, pWidth, pXpos, pYpos, WIDTH, HEIGHT,pXspeed);
+        var ship = new Player(ship, enemyimgFrameX, enemyimgFrameY, pHeight, pWidth, pXpos, pYpos, WIDTH, HEIGHT, pXspeed);
 
 
-        
+
         function mainLoop() {
-            if(lost == false || won == false){
-//            if(levelCheck){	
-//	checkCase();
-//}
-            drawAll();
-           // gameWon();
-            gameEnd();
-            enemyBulletShooting();
-//            
-//           var two =  drawImg(canvas.width-healthImgWidth *2 - healthImgGap, health2Xpos,imageAssests.player,healthImgWidth,healthImgHeight);
-//            
-//            var three = drawImg(canvas.width-healthImgWidth *3 - healthImgGap *2, health3Xpos,imageAssests.player,healthImgWidth,healthImgHeight);
+            //            if(lost == false || won == false){
+            //            if(levelCheck){	
+            //	checkCase();
+            //}
+            if (lost == false || won == false) {
+                console.log("hi2");
+                drawAll();
+                
+                gameEnd(); // both death or win conditions
+                enemyBulletShooting();
+             
+                ship.movePlayer();
+                ship.hasCollided();
+                //            if(ship.hasCollided){
+                //                console.log("hi");
+                //            }
+                playerScore();
 
-            
-            
-//            health1.drawplayerImage();
-            ship.movePlayer();
-            ship.hasCollided();
-//            if(ship.hasCollided){
-//                console.log("hi");
-//            }
-           playerScore();
-            
-            if (settingUp) {
-                setUp();
-                settingUp = false;
-            }
-            if (enemies.length > 0) {
-                enemies.forEach(function(item, index) {
-                    item.drawingEnemy();
-                    //item.enemyDrop();
-                    item.enemyMove();
-                //    item.spriteChange();
-                   // item.enemyChange();
-                });
-                 enemies.forEach(function(item, index){
-		   if(item.isDropDown()){				
-				for(i=0;i<enemies.length;i++){
-					enemies[i].dropDown();
-				}
-			}
-             });
-            }
-            if (bullets.length > 0) {
-                bullets.forEach(function(item, index) {
-                    item.drawingBullet();
-                    item.bulletMove();
-                    
-            if (item.outOfBounds() || item.hasCollided()) {
-                    playerBulletDelay = true;
-                        delete bullets[index];
-                    }
- 
-                });
-                bullets = bullets.filter(item => item !== undefined);
-            }
+                if (settingUp) {
+                    setUp();
+                    settingUp = false;
+                }
+                if (enemies.length > 0) {
+                    enemies.forEach(function(item, index) {
+                        item.drawingEnemy();
+                        //item.enemyDrop();
+                        item.enemyMove();
 
-            if (enemybullets.length > 0) {
-                enemybullets.forEach(function(item, index) {
-                    item.enemyBulletMove();
-                    item.drawingEnemyBullet();
-                    
-                    
-            if (item.outOfBounds()) {
-                //console.log("hi");
-                        delete enemybullets[index];
-                    }
-                });
-                enemybullets = enemybullets.filter(item => item !== undefined);
-            }
+                        //    item.spriteChange();
+                        // item.enemyChange();
+                    });
+                    enemies.forEach(function(item, index) {
+                        if (item.isDropDown()) {
+                            for (i = 0; i < enemies.length; i++) {
+                                enemies[i].dropDown();
+                            }
+                        }
+                    });
+                    enemies = enemies.filter(item => item !== undefined);
+                }
+                if (bullets.length > 0) {
+                    bullets.forEach(function(item, index) {
+                        item.drawingBullet();
+                        item.bulletMove();
+
+                        if (item.outOfBounds() || item.hasCollided()) {
+                            playerBulletDelay = true;
+                            delete bullets[index];
+                        }
+
+                    });
+                    bullets = bullets.filter(item => item !== undefined);
+                }
+
+                if (enemybullets.length > 0) {
+                    enemybullets.forEach(function(item, index) {
+                        item.enemyBulletMove();
+                        item.drawingEnemyBullet();
+
+
+                        if (item.outOfBounds()) {
+                            //console.log("hi");
+                            delete enemybullets[index];
+                        }
+                    });
+                    enemybullets = enemybullets.filter(item => item !== undefined);
+                }
+                //            }
+            } if(lost == true || won == true) {// game over screen
+                colorRect(0, 0, canvas.width, canvas.height, "black");
+                drawImg(canvas.width / 2 - 100, 0, imageAssests.logo, canvas.width / 2, canvas.height / 2);
+
+                if (lost) {
+                    text(canvas.width / 2 - 100, canvas.height - 150, 'white', '20pt Century Gothic', "Sorry " + username + " you died");
+                }
+                if (won) {
+                    text(canvas.width / 2 - 100, canvas.height - 150, 'white', '20pt Century Gothic', "You win " + username + "!");
+                }
+
+                text(canvas.width / 2 - 100, canvas.height - 50, 'white', '14pt Century Gothic', "Your score was " + score);
             }
 
         }
-//        if (spaceKeyPressed && shooting) {
-//            shooting = false;
-//        }
-        function drawAll(){
+        //        if (spaceKeyPressed && shooting) {
+        //            shooting = false;
+        //        }
+        function drawAll() {
             colorRect(0, 0, canvas.width, canvas.height, "black");
-            text(2,16,'white', '14pt Century Gothic',"Your score is: "  + score);
-            text(150,16,'white','14pt Century Gothic', "Difficulty: " + level)
+            text(2, 16, 'white', '14pt Century Gothic', "Your score is: " + score);
+            text(150, 16, 'white', '14pt Century Gothic', "Difficulty: " + level)
             ship.drawplayerImage();
-            if(lives == 3){
-           var one = drawImg(canvas.width-healthImgWidth-1, health1Ypos ,imageAssests.player,healthImgWidth,healthImgHeight);
+            if (lives == 3) {
+                var one = drawImg(canvas.width - healthImgWidth - 1, health1Ypos, imageAssests.player, healthImgWidth, healthImgHeight);
             }
-            if(lives >=2){
-           var two = drawImg(canvas.width-healthImgWidth*2 -2, health1Ypos,imageAssests.player,healthImgWidth,healthImgHeight);
+            if (lives >= 2) {
+                var two = drawImg(canvas.width - healthImgWidth * 2 - 2, health1Ypos, imageAssests.player, healthImgWidth, healthImgHeight);
             }
-            if(lives>=1){
-            var three = drawImg(canvas.width-healthImgWidth*3 -3, health1Ypos,imageAssests.player,healthImgWidth,healthImgHeight);
+            if (lives >= 1) {
+                var three = drawImg(canvas.width - healthImgWidth * 3 - 3, health1Ypos, imageAssests.player, healthImgWidth, healthImgHeight);
             }
         }
-        function setUp() {
+
+        function setUp() { // not running when using the replay button
+            
             drawEnemyBullet();
-           // spriteChange();
+            // spriteChange();
+            
             for (i = 0; i < enemyTotal; i++) {
                 drawMakeEnemies();
+                console.log("enemy: " + i );
             }
-            for(i=0;i<2;i++){
+            for (i = 0; i < 2; i++) {
                 enemySprites[i] = new Array(2);
-                 enemySprites[i][0] = 50 * i;
+                enemySprites[i][0] = 50 * i;
                 enemySprites[i][1] = 0;
             }
         }
-        
-function playerScore() {
-            if(scoreIncrease){
+
+        function playerScore() {
+            if (scoreIncrease) {
                 score++;
-                
-               //console.log("your score is: " + score);
-                scoreIncrease = false;   
-               }
-        }                 
 
-//function gameWon(){
-//    if(score == enemyTotal * 5){
-//        won = true;
-//        console.log(won);
-//        colorRect(0,0,canvas.width,canvas.height,"black");
-//        text(0,0 ,'white', '14pt Century Gothic',"You won!");
-//       }
-//}
-function gameEnd(){
-  
-    if(lives <= 0){
+                //console.log("your score is: " + score);
+                scoreIncrease = false;
+            }
+        }
 
-        lost = true;
-        console.log(lost);
-        colorRect(0,0,canvas.width,canvas.height,"black");
-        drawImg(canvas.width/2-100, 0,imageAssests.logo,canvas.width/2,canvas.height/2);
-  text(canvas.width/2-100, canvas.height - 150,'white', '20pt Century Gothic',"Sorry "+ username + " you died");
+        function restartButton() {
+            if (lost || won) { // users can't restart mid game
+                lives = 3;
+                ship.sx = 0;
+                for(i=0;i<enemies.length;i++){
+                    delete enemies[i];
+                }
+                enemies = enemies.filter(item => item !== undefined);
+                lost = false;
+                won = false;
+                score = 0;
+                restart = true;
+                settingUp = true;
+            }
+        }
 
-        text(canvas.width/2-100, canvas.height - 50,'white', '14pt Century Gothic',"You lost, your score was " + score);
-//        ship.sx = 84;
-       }
-    
-     if(score == enemyTotal * 5){
-      won = true;
-        console.log(won);
-        colorRect(0,0,canvas.width,canvas.height,"black");
-        drawImg(canvas.width/2-100, 0,imageAssests.logo,canvas.width/2,canvas.height/2);
-            
-        text(canvas.width/2-100, canvas.height - 50,'white', '14pt Century Gothic',"You won, your score was " + score);
-//        won = true;
-//        console.log(won);
-//        colorRect(0,0,canvas.width,canvas.height,"black");
-//        text(0,0 ,'white', '14pt Century Gothic',"You won!");
-       }
-}
+        //function gameWon(){
+        //    if(score == enemyTotal * 5){
+        //        won = true;
+        //        console.log(won);
+        //        colorRect(0,0,canvas.width,canvas.height,"black");
+        //        text(0,0 ,'white', '14pt Century Gothic',"You won!");
+        //       }
+        //}
+        
+        function gameEnd() {
 
+            if (lives <= 0) { // checking for lose condition
+                lost = true;
+                console.log(lost);
+            }
+
+            if (score == enemyTotal * 5) {
+                won = true;
+                console.log(won);
+            }
+        }
+        
     </script>
+
+
+    <button type="button" onclick="restartButton()">Replay</button>
 </body>
 </html>

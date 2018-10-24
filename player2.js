@@ -53,15 +53,23 @@ class Player {
         
         enemybullets.forEach(function (enemybullet, i) {
             if (self.hasHitEnemy(enemybullet)) {
-                
+
                 if(enemybullet.y + enemybullet.h > self.y){ // has collided with playershop xy 
                    //console.log('class hit');
                     enemybullet.y = canvas.height;
-                    self.sx = 85;
-                    console.log(self.sx);
                     lives--;
-                    console.log(enemybullet.y);
-                    
+                    console.log(enemybullet.y);        
+                }
+                if(lives == 1){
+                    console.log("hi");
+                        self.sx = 170;
+                       }
+                    if(lives == 2){
+                      self.sx = 85;
+                    console.log(self.sx);
+                       }
+                if(lives == 3){
+                    self.sx = 0;
                 }
                 collided = true;
             }
@@ -89,6 +97,7 @@ function keyPressed(evt) {
     }
     if (evt.keyCode == SPACE) {
         if (playerBulletDelay) {
+
             drawBullet();
             playerBulletDelay = false;
             console.log(playerBulletDelay);
@@ -104,7 +113,7 @@ function keyPressed(evt) {
 function keyReleased(evt) {
     if (evt.keyCode == RIGHT) {
         rightKeyPressed = false;
-        this.sx = 0;
+
     }
     if (evt.keyCode == LEFT) {
         leftKeyPressed = false;
