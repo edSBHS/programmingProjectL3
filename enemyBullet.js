@@ -53,7 +53,7 @@ function drawEnemyBullet(){
             var enemyBulletYpos = 1;
             var enemyBulletYspeed = 5;
     if(levelCaseCheck == "hard"){
-        var bulletTotal = Math.floor((Math.random() * 6) + 1);
+        var bulletTotal = Math.floor((Math.random() * 6) + 2);
     } else {
        var bulletTotal = Math.floor((Math.random() * 4) + 1); 
     }

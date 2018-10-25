@@ -181,6 +181,7 @@
         //        if (spaceKeyPressed && shooting) {
         //            shooting = false;
         //        }
+        
         function drawAll() {
             colorRect(0, 0, canvas.width, canvas.height, "black");
             text(2, 16, 'white', '14pt Century Gothic', "Your score is: " + score);
@@ -233,6 +234,7 @@
                 lost = false;
                 won = false;
                 score = 0;
+                enemyCount = 0;
                 restart = true;
                 settingUp = true;
             }
@@ -261,7 +263,12 @@
         }
         
     </script>
+<style>
+    html {
+        background-color: rgb(50,50,50);
+    }
 
+    </style>
 
     <button type="button" onclick="restartButton()">Replay</button>
 </body>

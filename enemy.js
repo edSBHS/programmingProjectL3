@@ -129,9 +129,9 @@
 //        var source2H = 85;
     
       //  var e3Xpos = enemyCount * (eWidth + eGap) ;
-        var e3Ypos = eHeight *3 + 10;
-        var e4Ypos = eHeight * 4 +15;
-        var e5Ypos = eHeight * 5 +20;
+        var e3Ypos = eHeight * 3 + 10;
+        var e4Ypos = eHeight * 4 + 15;
+        var e5Ypos = eHeight * 5 + 20;
 //        var sourceX3 = 0;
 //        var sourceY3 = 0;
 //        var source3W = 120;
