@@ -19,12 +19,12 @@
         text(canvas.width / 2 - 40, 20, 'white', '14pt Century Gothic', "Difficulty: " + level) //shows difficulty
         ship.drawplayerImage(); //the players ship
         if (lives == 3) { //the following is the health bar
-            var one = drawImg(canvas.width - healthImgWidth - 1, health1Ypos, imageAssests.player, healthImgWidth, healthImgHeight);
+            var one = drawImg(canvas.width - HEALTH_IMG_WIDTH - 1, HEALTH_Y_POS, imageAssests.player, HEALTH_IMG_WIDTH, HEALTH_IMG_HEIGHT);
         }
         if (lives >= 2) { //draws only if lives is equal or greater than 2
-            var two = drawImg(canvas.width - healthImgWidth * 2 - 2, health1Ypos, imageAssests.player, healthImgWidth, healthImgHeight);
+            var two = drawImg(canvas.width - HEALTH_IMG_WIDTH * 2 - 2, HEALTH_Y_POS, imageAssests.player, HEALTH_IMG_WIDTH, HEALTH_IMG_HEIGHT);
         }
         if (lives >= 1) {
-            var three = drawImg(canvas.width - healthImgWidth * 3 - 3, health1Ypos, imageAssests.player, healthImgWidth, healthImgHeight);
+            var three = drawImg(canvas.width - HEALTH_IMG_WIDTH * 3 - 3, HEALTH_Y_POS, imageAssests.player, HEALTH_IMG_WIDTH, HEALTH_IMG_HEIGHT);
         }
     }

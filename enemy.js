@@ -51,7 +51,7 @@
       //basic set up for enemy variables
 
       if (levelCaseCheck = "hard") { //for hard level, speed is increased
-          var eXspeed = 8;
+          var eXspeed = 9;
       } else {
           var eXspeed = 6;
       }
@@ -79,25 +79,25 @@
       var sourceY = 0;
       var sourceX = 0;
 
-      var sourceW = 48;
-      var sourceH = 29;
-      var sourceW2 = 80;
-      var sourceH2 = 80;
-      var sourceW3 = 120;
-      var sourceH3 = 80;
-      var sourceW4 = 110;
-      var sourceH4 = 80;
+      const SOURCE_W = 48;
+      const SOURCEH = 29;
+      const SOURCE_W2 = 80;
+      const SOURCEH2 = 80;
+      const SOURCE_W3 = 120;
+      const SOURCEH3 = 80;
+      const SOURCE_W4 = 110;
+      const SOURCEH4 = 80;
 
 
-      var e = new Enemy(enemy, sourceX, sourceY, sourceW, sourceH, eXpos, eYpos, eWidth, eHeight, eXspeed, delay, delayRate); //links all the variables, to set up the first row of enemys
+      var e = new Enemy(enemy, sourceX, sourceY, SOURCE_W, SOURCEH, eXpos, eYpos, eWidth, eHeight, eXspeed, delay, delayRate); //links all the variables, to set up the first row of enemys
 
-      var e2 = new Enemy(enemy2, sourceX, sourceY, sourceW2, sourceH2, eXpos, e2Ypos, e2Width, eHeight, eXspeed, delay, delayRate);
+      var e2 = new Enemy(enemy2, sourceX, sourceY, SOURCE_W2, SOURCEH2, eXpos, e2Ypos, e2Width, eHeight, eXspeed, delay, delayRate);
 
-      var e3 = new Enemy(enemy3, sourceX, sourceY, sourceW3, sourceH3, eXpos, e3Ypos, e2Width, eHeight, eXspeed, delay, delayRate);
+      var e3 = new Enemy(enemy3, sourceX, sourceY, SOURCE_W3, SOURCEH3, eXpos, e3Ypos, e2Width, eHeight, eXspeed, delay, delayRate);
 
-      var e4 = new Enemy(enemy4, sourceX, sourceY, sourceW4, sourceH4, eXpos, e4Ypos, e4Width, eHeight, eXspeed, delay, delayRate);
+      var e4 = new Enemy(enemy4, sourceX, sourceY, SOURCE_W4, SOURCEH4, eXpos, e4Ypos, e4Width, eHeight, eXspeed, delay, delayRate);
 
-      var e5 = new Enemy(enemy4, sourceX + 110, sourceY, sourceW4 + 7, sourceH4, eXpos, e5Ypos, e2Width + 6, eHeight, eXspeed, delay, delayRate);
+      var e5 = new Enemy(enemy4, sourceX + 110, sourceY, SOURCE_W4 + 7, SOURCEH4, eXpos, e5Ypos, e2Width + 6, eHeight, eXspeed, delay, delayRate);
 
       enemies.push(e5);
       enemies.push(e4);

@@ -37,7 +37,7 @@ function drawEnemyBullet() {
     var enemyBulletYspeed = 5;
 
     if (level == "hard") {
-        var bulletTotal = Math.floor((Math.random() * 6) + 2); //more bullets for hard
+        var bulletTotal = Math.floor((Math.random() * 7) + 3); //more bullets for hard
     } else {
         var bulletTotal = Math.floor((Math.random() * 4) + 1); //random between 1 and 4 bullets
     }
